@@ -1,10 +1,11 @@
-{
+{ 
   "name": "avaliacao-final-backend",
   "version": "1.0.0",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js" 
   },
   "dependencies": {
     "cors": "^2.8.5",
