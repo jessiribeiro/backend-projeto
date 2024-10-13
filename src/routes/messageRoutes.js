@@ -3,21 +3,27 @@ import { createMessage, users } from '../middleware/validation.js'; // Importe a
 
 const router = express.Router();
 
-// Rota para criar uma nova mensagem
 router.post('/', createMessage);
 
-// Rota para obter mensagens por email
-router.get('/:email', (req, res) => {
-    const { email } = req.params;
 
-    const userMessages = messages.filter(message => message.email === email);
-    if (userMessages.length === 0) {
-        return res.status(404).json({ message: 'Nenhuma mensagem encontrada para este email.' });
+router.get('/:email', (req, res) => {
+    try {
+        const { email } = req.params;
+
+        const userMessages = messages.filter(message => message.email === email);
+        
+        if (userMessages.length === 0) {
+            return res.status(404).json({ message: 'Nenhuma mensagem encontrada para este email.' });
+        }
+
+        res.status(200).json({ message: 'Seja bem-vinde!', messages: userMessages });
+        
+    } catch (error) {
+        console.error('Erro ao buscar mensagens:', error.message); 
+        res.status(500).json({ message: 'Erro interno no servidor' });
     }
-    res.status(200).json({ message: 'Seja bem-vinde!', messages: userMessages });
 });
 
-// Rota para atualizar uma mensagem
 router.put('/:id', (req, res) => {
     const { id } = req.params;
     const { title, description } = req.body;
@@ -37,7 +43,6 @@ router.put('/:id', (req, res) => {
     res.status(200).json({ message: 'Mensagem atualizada com sucesso!', messageData: message });
 });
 
-// Rota para deletar uma mensagem
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
     const index = messages.findIndex(msg => msg.id === parseInt(id));
