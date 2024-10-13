@@ -6,22 +6,16 @@ const router = express.Router();
 router.post('/', createMessage);
 
 
-router.get('/:email', (req, res) => {
-    try {
-        const { email } = req.params;
+router.get('/messages/:email', (req, res) => {
+    const { email } = req.params;
 
-        const userMessages = messages.filter(message => message.email === email);
-        
-        if (userMessages.length === 0) {
-            return res.status(404).json({ message: 'Nenhuma mensagem encontrada para este email.' });
-        }
+    const userMessages = messages.filter(message => message.email === email);
 
-        res.status(200).json({ message: 'Seja bem-vinde!', messages: userMessages });
-        
-    } catch (error) {
-        console.error('Erro ao buscar mensagens:', error.message); 
-        res.status(500).json({ message: 'Erro interno no servidor' });
+    if (userMessages.length === 0) {
+        return res.status(404).json({ message: 'Nenhuma mensagem encontrada para este email.' });
     }
+
+    res.status(200).json({ message: 'Seja bem-vinde!', messages: userMessages });
 });
 
 router.put('/:id', (req, res) => {
