@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, loginUser, users } from '../middleware/validation.js'; // Importando users
+import { createUser, loginUser, users } from '../middleware/validation.js'; 
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createMessage, users } from '../middleware/validation.js'; // Importe a função createMessage
+import { createMessage, users } from '../middleware/validation.js'; 
 
 const router = express.Router();
 
