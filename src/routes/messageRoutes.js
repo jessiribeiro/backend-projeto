@@ -3,7 +3,7 @@ import { createMessage, users } from '../middleware/validation.js';
 
 const router = express.Router();
 
-router.post('/', createMessage);
+router.post('/messages', createMessage);
 
 
 router.get('/messages/:email', (req, res) => {
